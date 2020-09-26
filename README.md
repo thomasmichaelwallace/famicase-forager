@@ -4,7 +4,7 @@ A Game By It's Cover 2020 Jam Entry
 
 ![Friend To All - Primdark](https://famicase.com/20/softs/062_sample.jpg)
 
-*Cartirdge image by [Austin Breed](http://famicase.com/20/softs/620.html)*
+*Cartirdge image by [Austin Breed](http://famicase.com/20/softs/062.html)*
 
 ## The Jam
 
