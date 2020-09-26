@@ -1,22 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Cinemachine;
 using UnityEngine;
 
 public class ControlledBehaviour : MonoBehaviour
 {
+    private CinemachineBasicMultiChannelPerlin _cameraNoise;
     private CharacterController _characterController;
-    
-    void Start()
+
+    private void Start()
     {
         _characterController = GetComponent<CharacterController>();
+        var camera = FindObjectOfType<CinemachineVirtualCamera>();
+        _cameraNoise = camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
-    void Update()
+    private void Update()
     {
-        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
-        float angle = Camera.main.transform.eulerAngles.y;
-        Vector3 move = Quaternion.Euler(0f, angle, 0f) * input;
-        
-        _characterController.SimpleMove( move);
+        var input = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
+        var angle = Camera.main.transform.eulerAngles.y;
+        var move = Quaternion.Euler(0f, angle, 0f) * input;
+
+        _cameraNoise.m_AmplitudeGain = Mathf.MoveTowards(_cameraNoise.m_AmplitudeGain, move.magnitude, Time.deltaTime * 5f);
+
+        _characterController.SimpleMove(move);
     }
 }
