@@ -12,6 +12,10 @@ public class ControlledBehaviour : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
     private CharacterController _character;
 
+    private float _groundRadius;
+    private Vector3 _groundOffset;
+    private LayerMask _groundLayer;
+    
     private bool _jump;
     private Vector3 _move;
     private float _vy;
@@ -19,25 +23,56 @@ public class ControlledBehaviour : MonoBehaviour
     private void Start()
     {
         _character = GetComponent<CharacterController>();
+        _groundRadius = _character.radius;
+        _groundOffset = new Vector3(0f, -_character.height * 0.5f, 0f);
+        _groundLayer = LayerMask.GetMask("Ground");
+
         var virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         _cameraNoise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         _camera = Camera.main;
     }
 
+   
     private void Update()
     {
         // walk/run
         var angle = _camera.transform.eulerAngles.y;
         var move = Quaternion.Euler(0f, angle, 0f) * _move * speed;
+        
+        // var hit = Physics.Raycast(transform.position, )
 
+        // Physics.CheckSphere(transform.position + _groundOffset, _groundRadius, _groundLayer);
         var isGrounded = _character.isGrounded;
         if (isGrounded)
         {
-            if (_vy < 0) _vy = 0f;
-            if (_jump)
+            bool hit = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, 10f, _groundLayer);
+            bool isStable = false;
+            Vector3? slide = null;
+            if (hit)
             {
-                _jump = false;
-                _vy = Mathf.Sqrt(jumpHeight * -3f * gravity);
+                float slope = Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up));
+                // Debug.Log(slope);
+                isStable = slope < 45f;
+                slide = hitInfo.normal;
+            }
+            else
+            {
+                Debug.Log("no slope info");
+            }
+
+            if (isStable)
+            {
+                if (_vy < 0) _vy = 0f;
+                if (_jump)
+                {
+                    _jump = false;
+                    _vy = Mathf.Sqrt(jumpHeight * -3f * gravity);
+                }
+            }
+            else if (slide.HasValue)
+            {
+                // slide
+                move = slide.Value;
             }
         }
 
@@ -52,7 +87,6 @@ public class ControlledBehaviour : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         var input = context.ReadValue<Vector2>();
-        Debug.Log(input);
         _move = new Vector3(input.x, 0f, input.y).normalized;
     }
 
