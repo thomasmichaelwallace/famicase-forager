@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ControlledBehaviour : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class ControlledBehaviour : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
     private CharacterController _characterController;
 
+    private Vector3 _move;
+    
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -17,25 +20,30 @@ public class ControlledBehaviour : MonoBehaviour
 
     private void Update()
     {
-        var input = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
-
         var angle = _camera.transform.eulerAngles.y;
-        var move = Quaternion.Euler(0f, angle, 0f) * input;
+        var move = Quaternion.Euler(0f, angle, 0f) * _move;
         _characterController.SimpleMove(move);
 
         _cameraNoise.m_AmplitudeGain =
-            Mathf.MoveTowards(_cameraNoise.m_AmplitudeGain, input.magnitude, Time.deltaTime * 5f);
+            Mathf.MoveTowards(_cameraNoise.m_AmplitudeGain, _move.magnitude, Time.deltaTime * 5f);
+    }
 
-        var fire = Input.GetButton("Fire1");
-        if (fire)
+    public void Move(InputAction.CallbackContext context)
+    {
+        var input = context.ReadValue<Vector2>();
+        Debug.Log(input);
+        _move = new Vector3(input.x, 0f, input.y).normalized;
+    }
+
+    public void Fire(InputAction.CallbackContext context)
+    {
+        Vector3 dir = Quaternion.Euler(_camera.transform.eulerAngles) * Vector3.forward;
+        var hit = Physics.Raycast(transform.position, dir, out var hitInfo);
+        if (hit)
         {
-            Vector3 dir = Quaternion.Euler(_camera.transform.eulerAngles) * Vector3.forward;
-            var hit = Physics.Raycast(transform.position, dir, out var hitInfo);
-            if (hit)
-            {
-                var interactableBehaviour = hitInfo.transform.GetComponent<InteractableBehaviour>();
-                if (interactableBehaviour) interactableBehaviour.Toggle();
-            }
+            var interactableBehaviour = hitInfo.transform.GetComponent<InteractableBehaviour>();
+            if (interactableBehaviour) interactableBehaviour.Toggle();
         }
     }
+    
 }
