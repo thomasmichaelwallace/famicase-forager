@@ -7,24 +7,23 @@ public class ControlledBehaviour : MonoBehaviour
 {
     private readonly float gravity = -9.81f;
     private readonly float jumpHeight = 1f;
-    private readonly float speed = 2f;
     private readonly float reach = 10f;
+    private readonly float speed = 2f;
     private readonly float sprint = 2f;
-
-    [NonSerialized]
-    public bool CanJump = true;
-    [NonSerialized]
-    public bool CanRun = false;    
 
     private Camera _camera;
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
     private CharacterController _character;
     private LayerMask _groundLayer;
-    
+
     private bool _jump;
-    private bool _run;
     private Vector3 _move;
+    private bool _run;
     private float _vy;
+
+    [NonSerialized] public bool CanJump = true;
+    [NonSerialized] public bool CanRun = true;
+    [NonSerialized] public bool CanBreak = true;
 
     private void Start()
     {
@@ -36,24 +35,24 @@ public class ControlledBehaviour : MonoBehaviour
         _camera = Camera.main;
     }
 
-   
+
     private void Update()
     {
         // walk/run
         var angle = _camera.transform.eulerAngles.y;
         var move = Quaternion.Euler(0f, angle, 0f) * _move * speed;
         if (CanRun && _run) move *= sprint;
-        
+
         // Physics.CheckSphere(transform.position + _groundOffset, _groundRadius, _groundLayer);
         var isGrounded = _character.isGrounded;
         if (isGrounded)
         {
-            bool hit = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hitInfo, 10f, _groundLayer);
-            bool isStable = false;
+            var hit = Physics.Raycast(transform.position, Vector3.down, out var hitInfo, 10f, _groundLayer);
+            var isStable = false;
             Vector3? slide = null;
             if (hit)
             {
-                float slope = Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up));
+                var slope = Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up));
                 // Debug.Log(slope);
                 isStable = slope < 45f;
                 slide = hitInfo.normal;
