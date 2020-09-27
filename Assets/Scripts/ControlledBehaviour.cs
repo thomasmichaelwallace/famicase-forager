@@ -7,11 +7,14 @@ public class ControlledBehaviour : MonoBehaviour
     private readonly float gravity = -9.81f;
     private readonly float jumpHeight = 1f;
     private readonly float speed = 2f;
+    private readonly float reach = 10f;
+
+    [HideInInspector]
+    public bool canJump = false;
 
     private Camera _camera;
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
     private CharacterController _character;
-
     private LayerMask _groundLayer;
     
     private bool _jump;
@@ -87,12 +90,13 @@ public class ControlledBehaviour : MonoBehaviour
     public void Fire(InputAction.CallbackContext context)
     {
         var dir = Quaternion.Euler(_camera.transform.eulerAngles) * Vector3.forward;
-        var hit = Physics.Raycast(transform.position, dir, out var hitInfo);
+        var hit = Physics.Raycast(transform.position, dir, out var hitInfo, reach);
         if (hit) hitInfo.transform.GetComponent<IInteractable>()?.Interact(this);
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
+        if (!canJump) return;
         _jump = context.ReadValueAsButton();
     }
 }
