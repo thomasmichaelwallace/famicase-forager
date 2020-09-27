@@ -38,9 +38,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Switch",
+                    "name": "Run",
                     "type": "Button",
-                    "id": "628aedd5-1cb8-4e3e-a7e2-1f1e685fcacd",
+                    "id": "0b33a992-e064-4fda-beda-91ecacdd1eb3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -221,37 +221,37 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "81964ba9-59f0-4fc8-bdb0-02f2a15ac140",
-                    "path": "1DAxis",
+                    "name": "",
+                    "id": "23cc726a-7b80-44bc-bbf6-e7ad6a272ca0",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Switch",
-                    "isComposite": true,
+                    "groups": "Gamepad",
+                    "action": "Jump",
+                    "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "8b2779bb-7ea7-4caf-8cec-916842a20b9f",
-                    "path": "<Keyboard>/1",
+                    "name": "",
+                    "id": "7df85355-e3ff-4098-a6c1-9710fe4e3840",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Switch",
+                    "groups": "Gamepad",
+                    "action": "Run",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
-                    "name": "positive",
-                    "id": "78bdc75d-3106-41de-b2d7-1608f531b5c7",
-                    "path": "<Keyboard>/2",
+                    "name": "",
+                    "id": "1a86fcd4-0f2b-4ffc-8c59-5b2c5fb0e4bc",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Switch",
+                    "action": "Run",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -260,6 +260,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "508f59c3-b203-4c17-9ad3-e9235577e63b",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false

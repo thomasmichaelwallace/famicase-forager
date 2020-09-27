@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class MushJump : MonoBehaviour, IInteractable
+public class MushRun : MonoBehaviour, IInteractable
 {
     public void Interact(ControlledBehaviour controlled)
     {
-        controlled.CanJump = true;
+        controlled.CanRun = true;
         Destroy(gameObject);
     }
 }

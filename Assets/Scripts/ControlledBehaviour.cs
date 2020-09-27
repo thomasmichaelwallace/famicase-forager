@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,9 +9,12 @@ public class ControlledBehaviour : MonoBehaviour
     private readonly float jumpHeight = 1f;
     private readonly float speed = 2f;
     private readonly float reach = 10f;
+    private readonly float sprint = 2f;
 
-    [HideInInspector]
-    public bool canJump = false;
+    [NonSerialized]
+    public bool CanJump = true;
+    [NonSerialized]
+    public bool CanRun = false;    
 
     private Camera _camera;
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
@@ -18,6 +22,7 @@ public class ControlledBehaviour : MonoBehaviour
     private LayerMask _groundLayer;
     
     private bool _jump;
+    private bool _run;
     private Vector3 _move;
     private float _vy;
 
@@ -37,6 +42,7 @@ public class ControlledBehaviour : MonoBehaviour
         // walk/run
         var angle = _camera.transform.eulerAngles.y;
         var move = Quaternion.Euler(0f, angle, 0f) * _move * speed;
+        if (CanRun && _run) move *= sprint;
         
         // Physics.CheckSphere(transform.position + _groundOffset, _groundRadius, _groundLayer);
         var isGrounded = _character.isGrounded;
@@ -96,7 +102,13 @@ public class ControlledBehaviour : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (!canJump) return;
+        if (!CanJump) return;
         _jump = context.ReadValueAsButton();
+    }
+
+    public void Run(InputAction.CallbackContext context)
+    {
+        if (!CanRun) return;
+        _run = context.ReadValueAsButton();
     }
 }
