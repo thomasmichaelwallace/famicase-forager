@@ -10,11 +10,13 @@ public class ControlledBehaviour : MonoBehaviour
     private readonly float reach = 10f;
     private readonly float speed = 2f;
     private readonly float sprint = 2f;
+    private readonly float climb = 60f;
 
     private Camera _camera;
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
     private CharacterController _character;
     private LayerMask _groundLayer;
+    private float _walkSlope;
 
     private bool _jump;
     private Vector3 _move;
@@ -29,6 +31,7 @@ public class ControlledBehaviour : MonoBehaviour
     {
         _character = GetComponent<CharacterController>();
         _groundLayer = LayerMask.GetMask("Ground");
+        _walkSlope = _character.slopeLimit;
 
         var virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         _cameraNoise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
@@ -54,7 +57,7 @@ public class ControlledBehaviour : MonoBehaviour
             {
                 var slope = Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up));
                 // Debug.Log(slope);
-                isStable = slope < 45f;
+                isStable = slope < _character.slopeLimit;
                 slide = hitInfo.normal;
             }
             else
@@ -109,5 +112,7 @@ public class ControlledBehaviour : MonoBehaviour
     {
         if (!CanRun) return;
         _run = context.ReadValueAsButton();
+
+        _character.slopeLimit = _run ? climb : _walkSlope;
     }
 }
