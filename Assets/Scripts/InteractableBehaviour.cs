@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class InteractableBehaviour : MonoBehaviour
+public class InteractableBehaviour : MonoBehaviour, IInteractable
 {
     public Material selected;
 
@@ -14,7 +14,7 @@ public class InteractableBehaviour : MonoBehaviour
         _material = _renderer.material;
     }
 
-    public void Toggle()
+    public void Interact(ControlledBehaviour controlled)
     {
         _toggled = !_toggled;
         _renderer.material = _toggled ? selected : _material;

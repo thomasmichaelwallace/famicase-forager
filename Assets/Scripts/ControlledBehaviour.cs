@@ -12,8 +12,6 @@ public class ControlledBehaviour : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
     private CharacterController _character;
 
-    private float _groundRadius;
-    private Vector3 _groundOffset;
     private LayerMask _groundLayer;
     
     private bool _jump;
@@ -23,8 +21,6 @@ public class ControlledBehaviour : MonoBehaviour
     private void Start()
     {
         _character = GetComponent<CharacterController>();
-        _groundRadius = _character.radius;
-        _groundOffset = new Vector3(0f, -_character.height * 0.5f, 0f);
         _groundLayer = LayerMask.GetMask("Ground");
 
         var virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
@@ -39,8 +35,6 @@ public class ControlledBehaviour : MonoBehaviour
         var angle = _camera.transform.eulerAngles.y;
         var move = Quaternion.Euler(0f, angle, 0f) * _move * speed;
         
-        // var hit = Physics.Raycast(transform.position, )
-
         // Physics.CheckSphere(transform.position + _groundOffset, _groundRadius, _groundLayer);
         var isGrounded = _character.isGrounded;
         if (isGrounded)
@@ -94,11 +88,7 @@ public class ControlledBehaviour : MonoBehaviour
     {
         var dir = Quaternion.Euler(_camera.transform.eulerAngles) * Vector3.forward;
         var hit = Physics.Raycast(transform.position, dir, out var hitInfo);
-        if (hit)
-        {
-            var interactableBehaviour = hitInfo.transform.GetComponent<InteractableBehaviour>();
-            if (interactableBehaviour) interactableBehaviour.Toggle();
-        }
+        if (hit) hitInfo.transform.GetComponent<IInteractable>()?.Interact(this);
     }
 
     public void Jump(InputAction.CallbackContext context)
