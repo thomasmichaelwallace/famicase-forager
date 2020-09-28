@@ -23,9 +23,9 @@ public class ControlledBehaviour : MonoBehaviour
     private bool _run;
     private float _vy;
 
-    [NonSerialized] public bool CanJump = true;
-    [NonSerialized] public bool CanRun = true;
-    [NonSerialized] public bool CanBreak = true;
+    [NonSerialized] public bool CanJump = false;
+    [NonSerialized] public bool CanRun = false;
+    [NonSerialized] public bool CanBreak = false;
 
     private void Start()
     {
