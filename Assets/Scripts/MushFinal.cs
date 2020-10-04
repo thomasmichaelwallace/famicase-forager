@@ -24,5 +24,6 @@ public class MushFinal : MonoBehaviour, IInteractable
     {
         _collected = true;
         _text.text = "You Win!";
+        gameObject.GetComponent<Hidable>().Hide();
     }
 }

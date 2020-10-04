@@ -5,6 +5,6 @@ public class MushBreak : MonoBehaviour, IInteractable
     public void Interact(ControlledBehaviour controlled)
     {
         controlled.CanBreak = true;
-        Destroy(gameObject);
+        gameObject.GetComponent<Hidable>().Hide();
     }
 }
