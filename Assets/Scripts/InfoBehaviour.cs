@@ -32,4 +32,17 @@ public class InfoBehaviour : MonoBehaviour
         if (_shown) SetText();
         _canvas.alpha = _shown ? 1 : 0;
     }
+
+    public void Show(string text)
+    {
+        _shown = true;
+        _canvas.alpha = _shown ? 1 : 0;
+        _text.text = text + "\n\n([Click] to hide)";
+    }
+
+    public void Hide()
+    {
+        _shown = false;
+        _canvas.alpha = 0;
+    }
 }

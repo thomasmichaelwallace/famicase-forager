@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,13 @@ public class Hidable : MonoBehaviour
 {
     private bool _hiding;
     private float _t;
+    private InfoBehaviour _info;
+    private string _text = "";
+
+    private void Start()
+    {
+        _info = FindObjectOfType<InfoBehaviour>();
+    }
 
     void Update()
     {
@@ -17,14 +25,20 @@ public class Hidable : MonoBehaviour
 
             if (_t >= 1)
             {
+                if (_text != "") _info.Show(_text);
                 Destroy(gameObject);
             }
         }
     }
 
+    public void Hide(string text)
+    {
+        _hiding = true;
+        _text = text;
+    }
+
     public void Hide()
     {
-        Debug.Log("hiding");
         _hiding = true;
     }
 }
