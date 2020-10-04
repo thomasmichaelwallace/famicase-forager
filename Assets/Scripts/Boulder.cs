@@ -16,7 +16,8 @@ public class Boulder : MonoBehaviour, IInteractable
         if (controlled.CanBreak && !_exploded)
         {
             _exploded = true;
-            _explodable.Explode(transform);
+            _explodable.Explode(transform.GetChild((0)));
+            Destroy(gameObject, 0.5f);
         }
     }
 }
