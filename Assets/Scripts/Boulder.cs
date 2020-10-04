@@ -1,9 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Boulder : MonoBehaviour, IInteractable
 {
+    private Explodable _explodable;
+    private bool _exploded;
+
+    private void Start()
+    {
+        _explodable = GetComponent<Explodable>();
+    }
+
     public void Interact(ControlledBehaviour controlled)
     {
-        if (controlled.CanBreak) Destroy(gameObject);
+        if (controlled.CanBreak && !_exploded)
+        {
+            _exploded = true;
+            _explodable.Explode(transform);
+        }
     }
 }
