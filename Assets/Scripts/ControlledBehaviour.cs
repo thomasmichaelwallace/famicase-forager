@@ -10,7 +10,7 @@ public class ControlledBehaviour : MonoBehaviour
     private readonly float reach = 10f;
     private readonly float speed = 2f;
     private readonly float sprint = 2f;
-    private readonly float climb = 60f;
+    private readonly float climb = 50f;
 
     private Camera _camera;
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
@@ -23,9 +23,9 @@ public class ControlledBehaviour : MonoBehaviour
     private bool _run;
     private float _vy;
 
-    [NonSerialized] public bool CanJump = false;
-    [NonSerialized] public bool CanRun = false;
-    [NonSerialized] public bool CanBreak = false;
+    [NonSerialized] public bool CanJump = true;
+    [NonSerialized] public bool CanRun = true;
+    [NonSerialized] public bool CanBreak = true;
 
     private void Start()
     {
