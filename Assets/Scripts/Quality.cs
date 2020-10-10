@@ -6,19 +6,25 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class Quality : MonoBehaviour
 {
-    private float autoSwitchRenderTime = 500f;
+    private float autoSwitchRenderTime = 0.5f;
+    private bool _hasSwitched = false;
     private PostProcessLayer _post;
+    private InfoBehaviour _info;
 
     void Start()
     {
         _post = Camera.main.GetComponent<PostProcessLayer>();
+        _info = FindObjectOfType<InfoBehaviour>();
     }
     
     void Update()
     {
+        if (_hasSwitched) return;
         if (Time.deltaTime > autoSwitchRenderTime)
         {
+            _hasSwitched = true;
             _post.enabled = false;
+            _info.Show("Quality auto-switched. Press 1 to switch back.");
         }
     }
     
