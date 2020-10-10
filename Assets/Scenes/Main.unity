@@ -1659,7 +1659,7 @@ LightingSettings:
   m_Name: Settings.lighting
   serializedVersion: 2
   m_GIWorkflowMode: 1
-  m_EnableBakedLightmaps: 1
+  m_EnableBakedLightmaps: 0
   m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1
   m_BounceScale: 1
@@ -1727,6 +1727,7 @@ GameObject:
   - component: {fileID: 152516754}
   - component: {fileID: 152516753}
   - component: {fileID: 152516755}
+  - component: {fileID: 152516756}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -1871,6 +1872,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fa70ac7c-9a41-44d7-97ba-23fd9256fec7
     m_ActionName: Player/Grab[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 152516756}
+        m_TargetAssemblyTypeName: Quality, Assembly-CSharp
+        m_MethodName: Toggle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ac02b011-94fc-4c59-a3c8-0719e6e665f7
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1900,6 +1917,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea27d5d530e92e74da3aaa02e69f79cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &152516756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152516752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abac539a11dff144884f14a606ef3cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &162932201
@@ -5555,7 +5584,7 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
+  m_ShowToolkit: 1
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
@@ -7214,7 +7243,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113948223}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
   m_Name: 

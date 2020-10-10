@@ -14,46 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
   - {fileID: 6954938939072291298}
-  - {fileID: 2443401583052918990}
-  - {fileID: 6650251350971558267}
---- !u!114 &2443401583052918990
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b8f82b3a6922ec49931dd65e989fb90, type: 3}
-  m_Name: Pixelate
-  m_EditorClassIdentifier: 
-  active: 0
-  enabled:
-    overrideState: 1
-    value: 1
-  pixelSize:
-    overrideState: 0
-    value: 10
---- !u!114 &6650251350971558267
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc1134c094d75546b9bfc5e0d97d88a, type: 3}
-  m_Name: SNES
-  m_EditorClassIdentifier: 
-  active: 0
-  enabled:
-    overrideState: 1
-    value: 1
-  bandingLevels:
-    overrideState: 1
-    value: 15
 --- !u!114 &6954938939072291298
 MonoBehaviour:
   m_ObjectHideFlags: 3
