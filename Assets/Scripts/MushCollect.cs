@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class MushCollect : MonoBehaviour, IInteractable
 {
-    private static int _total = 0;
-    private static int _found = 0;
+    
 
     private bool _collected = false;
+
+    private Score _score;
     
     void Start()
     {
-        _total += 1;
+        _score = FindObjectOfType<Score>();
+        _score.Register();
     }
 
     public void Interact(ControlledBehaviour controlled)
@@ -20,9 +22,7 @@ public class MushCollect : MonoBehaviour, IInteractable
         if (_collected) return;
         
         _collected = true;
-        _found += 1;
-        
-        Debug.Log("found " + _found + " of " + _total);
+        _score.Count();
         
         gameObject.GetComponent<Hidable>().Hide();
     }
