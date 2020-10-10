@@ -114,6 +114,7 @@ public class ControlledBehaviour : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
         var dir = Quaternion.Euler(_camera.transform.eulerAngles) * Vector3.forward;
         var hit = Physics.Raycast(transform.position, dir, out var hitInfo, reach);
         if (hit) hitInfo.transform.GetComponent<IInteractable>()?.Interact(this);
