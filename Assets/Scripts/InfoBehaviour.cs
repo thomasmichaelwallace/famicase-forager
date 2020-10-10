@@ -6,8 +6,10 @@ public class InfoBehaviour : MonoBehaviour
 {
     private ControlledBehaviour _player;
     private CanvasGroup _canvas;
+    public CanvasGroup titleCanvas;
     private TextMeshProUGUI _text;
     private bool _shown;
+    private bool _title = true;
 
     private void Start()
     {
@@ -28,6 +30,14 @@ public class InfoBehaviour : MonoBehaviour
     public void Toggle(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
+        
+        if (_title)
+        {
+            titleCanvas.alpha = 0;
+            _title = false;
+            return;
+        }
+        
         _shown = !_shown;
         if (_shown) SetText();
         _canvas.alpha = _shown ? 1 : 0;
@@ -42,7 +52,15 @@ public class InfoBehaviour : MonoBehaviour
 
     public void Hide()
     {
-        _shown = false;
-        _canvas.alpha = 0;
+        if (_title)
+        {
+            titleCanvas.alpha = 0;
+            _title = false;
+        }
+        else
+        {
+            _shown = false;
+            _canvas.alpha = 0;   
+        }
     }
 }
