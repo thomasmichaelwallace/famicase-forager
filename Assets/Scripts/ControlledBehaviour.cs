@@ -1,5 +1,6 @@
 ﻿using System;
 using Cinemachine;
+using Cinemachine.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -79,7 +80,7 @@ public class ControlledBehaviour : MonoBehaviour
                     _vy = Mathf.Sqrt(jumpHeight * -3f * gravity);
                 }
 
-                walking = true;
+                walking = !_move.AlmostZero();
             }
             else if (slide.HasValue)
             {
