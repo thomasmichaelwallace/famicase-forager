@@ -18,9 +18,6 @@ public class MouseControl : MonoBehaviour
         if (!context.performed) return;
         Cursor.lockState = CursorLockMode.None;
         Cursor.lockState = CursorLockMode.Locked;
-        if (Cursor.lockState != CursorLockMode.Locked || Cursor.visible)
-        {
-            _info.Show("Could not capture mouse. Try switching back/forth tabs");
-        }
+        Cursor.visible = false;
     } 
 }
