@@ -6,7 +6,10 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class Quality : MonoBehaviour
 {
-    private float autoSwitchRenderTime = 0.5f;
+    private float autoSwitchRenderTime = 0.1f;
+    private int _switchAfterTimes = 10;
+    private int _missed;
+    
     private bool _hasSwitched = false;
     private PostProcessLayer _post;
     private InfoBehaviour _info;
@@ -22,6 +25,10 @@ public class Quality : MonoBehaviour
         if (_hasSwitched) return;
         if (Time.deltaTime > autoSwitchRenderTime)
         {
+            _missed += 1;
+        }
+        if (_missed > _switchAfterTimes)
+        {
             _hasSwitched = true;
             _post.enabled = false;
             _info.Show("Quality auto-switched. Press 1 to switch back.");
@@ -30,6 +37,10 @@ public class Quality : MonoBehaviour
     
     public void Toggle(InputAction.CallbackContext context)
     {
-        if (context.performed) _post.enabled = !_post.enabled;
+        if (context.performed)
+        {
+            _hasSwitched = true;
+            _post.enabled = !_post.enabled;
+        }
     }
 }
