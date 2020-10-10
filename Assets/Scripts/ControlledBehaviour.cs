@@ -16,8 +16,9 @@ public class ControlledBehaviour : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
     private CharacterController _character;
     private LayerMask _groundLayer;
+    private AudioSource _audio;
+    
     private float _walkSlope;
-
     private bool _jump;
     private Vector3 _move;
     private bool _run;
@@ -36,6 +37,8 @@ public class ControlledBehaviour : MonoBehaviour
         var virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         _cameraNoise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         _camera = Camera.main;
+
+        _audio = GetComponent<AudioSource>();
     }
 
 
@@ -46,6 +49,8 @@ public class ControlledBehaviour : MonoBehaviour
         var move = Quaternion.Euler(0f, angle, 0f) * _move * speed;
         if (CanRun && _run) move *= sprint;
 
+        var walking = false;
+        
         // Physics.CheckSphere(transform.position + _groundOffset, _groundRadius, _groundLayer);
         var isGrounded = _character.isGrounded;
         if (isGrounded)
@@ -58,12 +63,12 @@ public class ControlledBehaviour : MonoBehaviour
                 var slope = Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up));
                 // Debug.Log(slope);
                 isStable = slope < _character.slopeLimit;
-                slide = hitInfo.normal;
+                slide = hitInfo.normal * speed;
             }
-            else
-            {
-                Debug.Log("no slope info");
-            }
+            // else
+            // {
+            //     Debug.Log("no slope info");
+            // }
 
             if (isStable)
             {
@@ -73,6 +78,8 @@ public class ControlledBehaviour : MonoBehaviour
                     _jump = false;
                     _vy = Mathf.Sqrt(jumpHeight * -3f * gravity);
                 }
+
+                walking = true;
             }
             else if (slide.HasValue)
             {
@@ -87,6 +94,15 @@ public class ControlledBehaviour : MonoBehaviour
         _character.Move(move * Time.deltaTime);
         _cameraNoise.m_AmplitudeGain =
             Mathf.MoveTowards(_cameraNoise.m_AmplitudeGain, _move.magnitude, Time.deltaTime * 5f);
+
+        if (walking)
+        {
+            if (!_audio.isPlaying) _audio.Play();
+        }
+        else
+        {
+            if (_audio.isPlaying) _audio.Stop();
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
