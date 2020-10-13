@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class MushCollect : MonoBehaviour, IInteractable
 {
-    
-
     private bool _collected = false;
 
     private Score _score;
