@@ -27,7 +27,8 @@ public class InfoBehaviour : MonoBehaviour
         text += "\n{wasd} to move";
         if (_player.CanJump) text += "\n{space} to jump";
         if (_player.CanRun) text += "\nhold {shift} to run";
-        text += "\n{1} to switch quality</size>";
+        text += "\n{1} to switch quality";
+        text += "\n{+/-} in/de-crease look speed</size>";
 
         text += "<size=75%>\n\n{click} to continue</size>";
         _text.text = text;
