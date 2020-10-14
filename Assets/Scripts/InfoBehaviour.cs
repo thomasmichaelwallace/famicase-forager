@@ -22,13 +22,14 @@ public class InfoBehaviour : MonoBehaviour
     
     private void SetText()
     {
-        string text = "Forage for mushrooms<size=20%>\n\n</size><size=80%>\n</size><size=80%>{mouse} to look\n{click} to pickup";
+        string text = "Forage for mushrooms<size=20%>\n\n</size><size=80%>{mouse} to look\n{click} to pickup";
         if (_player.CanBreak) text += "/smash";
         text += "\n{wasd} to move";
         if (_player.CanJump) text += "\n{space} to jump";
         if (_player.CanRun) text += "\nhold {shift} to run";
         text += "\n{1} to switch quality</size>";
-        
+
+        text += "<size=75%>\n\n{click} to continue</size>";
         _text.text = text;
     }
     
