@@ -18,12 +18,17 @@ public class InfoBehaviour : MonoBehaviour
         _player = FindObjectOfType<ControlledBehaviour>();
     }
 
+    
+    
     private void SetText()
     {
-        string text = "Forage for mushrooms to get more abilities.";
-        if (_player.CanJump) text += "\nYou have the jump ability!";
-        if (_player.CanRun) text += "\nYou have the run ability!";
-        if (_player.CanBreak) text += "\nYou have the break ability!";
+        string text = "Forage for mushrooms<size=20%>\n\n</size><size=80%>\n</size><size=80%>{mouse} to look\n{click} to pickup";
+        if (_player.CanBreak) text += "/smash";
+        text += "\n{wasd} to move";
+        if (_player.CanJump) text += "\n{space} to jump";
+        if (_player.CanRun) text += "\nhold {shift} to run";
+        text += "\n{1} to switch quality</size>";
+        
         _text.text = text;
     }
     
@@ -47,7 +52,7 @@ public class InfoBehaviour : MonoBehaviour
     {
         _shown = true;
         _canvas.alpha = _shown ? 1 : 0;
-        _text.text = text + "\n\n([Click] to hide)";
+        _text.text = text + "<size=75%>\n\n{click} to continue</size>";
     }
 
     public void Hide()

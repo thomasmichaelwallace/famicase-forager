@@ -31,7 +31,7 @@ public class Quality : MonoBehaviour
         {
             _hasSwitched = true;
             _post.enabled = false;
-            _info.Show("Quality auto-switched. Press 1 to switch back.");
+            _info.Show("Quality auto-switched.\nPress {1} to switch back");
         }
     }
     

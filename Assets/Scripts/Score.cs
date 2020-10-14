@@ -10,7 +10,7 @@ public class Score : MonoBehaviour
 
     private TextMeshProUGUI _text;
     
-    void Start()
+    void Awake()
     {
         _text = GetComponent<TextMeshProUGUI>();
     }
@@ -30,5 +30,10 @@ public class Score : MonoBehaviour
     void SetText()
     {
         _text.text = "{" + _found + "/" + _total + "}";
+    }
+
+    public string GetText()
+    {
+        return _found + "/" + _total;
     }
 }

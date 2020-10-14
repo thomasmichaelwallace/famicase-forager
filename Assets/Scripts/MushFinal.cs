@@ -8,10 +8,12 @@ public class MushFinal : MonoBehaviour, IInteractable
     private bool _collected;
 
     private TextMeshProUGUI _text;
+    private Score _score;
 
     private void Start()
     {
         _text = screen.GetComponentInChildren<TextMeshProUGUI>();
+        _score = FindObjectOfType<Score>();
     }
 
     private void Update()
@@ -23,7 +25,7 @@ public class MushFinal : MonoBehaviour, IInteractable
     public void Interact(ControlledBehaviour controlled)
     {
         _collected = true;
-        _text.text = "You Win!";
+        _text.text = "FORAGER\n<size=30>You foraged " + _score.GetText() + " of the hidden mushrooms!</size>";
         gameObject.GetComponent<Hidable>().Hide();
     }
 }

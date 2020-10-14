@@ -7186,7 +7186,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '{{ todo }}'
+  m_text: FORAGER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6b72db53d06e9264abd7120124d91125, type: 2}
   m_sharedMaterial: {fileID: -1217939250533277882, guid: 6b72db53d06e9264abd7120124d91125, type: 2}
