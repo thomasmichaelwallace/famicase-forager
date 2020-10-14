@@ -2153,6 +2153,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ac02b011-94fc-4c59-a3c8-0719e6e665f7
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 152516756}
+        m_TargetAssemblyTypeName: Quality, Assembly-CSharp
+        m_MethodName: Sensitivity
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a6b156db-1bd0-4f9d-90d7-3dd31792c002
+    m_ActionName: Player/MouseDpi[/Keyboard/numpadPlus,/Keyboard/minus,/Keyboard/minus,/Keyboard/equals]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2196,6 +2212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abac539a11dff144884f14a606ef3cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 1113948224}
 --- !u!1 &162932201
 GameObject:
   m_ObjectHideFlags: 0
